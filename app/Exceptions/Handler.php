@@ -12,7 +12,7 @@ class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that should not be reported.
-     *
+     * 不会被日志的异常列表
      * @var array
      */
     protected $dontReport = [

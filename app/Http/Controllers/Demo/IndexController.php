@@ -8,19 +8,23 @@
 
 namespace App\Http\Controllers\Demo;
 
-
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Gate;
 
 class IndexController extends Controller
 {
 
     public function showDemo()
     {
-        //$url = action('Demo\IndexController@showDemo');
-        //dd(env('ABC'));
-        dd(Config::get('local.app.url'));
+        $post = new \stdClass();
+
+        if (Gate::denies('update-post', $post)) {
+            dd("该操作权限不足");
+            abort(403);
+        }
+
+
         return view('demo.index');
     }
 }
